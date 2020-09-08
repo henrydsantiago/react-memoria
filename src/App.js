@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import Header from './Header'
+import Tablero from './Tablero';
 import './App.css';
+import construirBaraja from './utils/construirBaraja'
+
+
+const estadoInicial = {
+  baraja: construirBaraja(),
+  parejaSeleccionada:['Hola'],
+  estaComparando: false, 
+}
+
+
 
 function App() {
+  const [state, setState] = useState(estadoInicial) ;
+
+  function seleccionarCarta(carta){
+    console.log('Estoy en SeleccionarCarta', carta)
+    if(
+      state.estaComparando ||
+      state.parejaSeleccionada.indexOf(carta)>-1 ||
+      carta.fueAdivinada
+    ){
+      return;
+    } 
+    const parejaSeleccionada = [...state.parejaSeleccionada, carta]
+    setState(parejaSeleccionada)
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Tablero 
+        {...state}
+        seleccionarCarta = {()=>seleccionarCarta}
+      />
     </div>
   );
 }
+
+
 
 export default App;

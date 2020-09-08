@@ -1,0 +1,19 @@
+.carta, .portada{
+    background-color: #ffb300;
+    width: 125px;
+    height: 125px;
+}
+
+.contenido{
+    width: 125px;
+    height: 125px;
+    background-color: rgb(3, 220, 244);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ReactFlipCard{
+    width: 100%;
+    height: 100%;
+}
